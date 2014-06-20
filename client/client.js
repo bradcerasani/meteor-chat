@@ -5,7 +5,11 @@ Template.messages.messages = function() {
 Template.input.events = {
   'keydown input#message' : function(e) {
     if (e.which == 13) {
-      var name = 'Anonymous';
+      if (Meteor.user())
+        var name = Meteor.user().profile.name;
+      else
+        var name = "Anon";
+
       var message = document.getElementById('message');
 
       if (message.value != '') {
